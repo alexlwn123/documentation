@@ -144,7 +144,7 @@ function requestPrice()
   public
 {
   Chainlink.Request memory request = buildChainlinkRequest(jobId, address(this), this.callback.selector);
-  uint256 paymentAmount = 1 * LINK_DIVISIBILITY;
+  uint256 paymentAmount = 1 * LINK_DIVISIBILITY / 10; // Equivalent to 0.1 LINK
 
   // send the request that you just built
   sendChainlinkRequest(request, paymentAmount);
@@ -368,7 +368,7 @@ Emitted when [cancelChainlinkRequest](#cancelchainlinkrequest) is called. Includ
 `LINK_DIVISIBILITY` is a uint256 constant to represent one whole unit of the LINK token (1000000000000000000). It can be used with another value to specify payment in an easy-to-read format, instead of hardcoding magic numbers.
 
 ```solidity example
-uint256 constant private ORACLE_PAYMENT = 100 * LINK;
+uint256 constant private ORACLE_PAYMENT = 100 * LINK_DIVISIBILITY;
 ```
 
 ## Modifiers
@@ -453,7 +453,7 @@ function requestEthereumPrice()
 
   req.add("get", "https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD,EUR,JPY");
 
-  sendChainlinkRequest(req, LINK * 1);
+  sendChainlinkRequest(req, LINK_DIVISIBILITY * 1);
 }
 ```
 
@@ -477,7 +477,7 @@ function requestEmojiPopularity(bytes _unicode)
 
   req.addBytes("emojiUnicode", _unicode);
 
-  sendChainlinkRequest(req, LINK * 1);
+  sendChainlinkRequest(req, LINK_DIVISIBILITY * 1);
 }
 ```
 
@@ -501,7 +501,7 @@ function requestPrice()
 
   req.addInt("times", 100);
 
-  sendChainlinkRequest(req, LINK * 1);
+  sendChainlinkRequest(req, LINK_DIVISIBILITY * 1);
 }
 ```
 
@@ -525,7 +525,7 @@ function requestPrice()
 
   req.addUint("times", 100);
 
-  sendChainlinkRequest(req, LINK * 1);
+  sendChainlinkRequest(req, LINK_DIVISIBILITY * 1);
 }
 ```
 
