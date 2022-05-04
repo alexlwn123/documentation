@@ -45,7 +45,7 @@ API reference for [`ChainlinkClient`](https://github.com/smartcontractkit/chainl
 
 | Name                                    | Description                                                                       |
 | :-------------------------------------- | --------------------------------------------------------------------------------- |
-| [LINK_DIVISIBILITY](#link-divisibility) | Helper uint256 to represent the divisibility of a LINK token. Equivalent to 10^18 |
+| [LINK_DIVISIBILITY](#link_divisibility) | Helper uint256 to represent the divisibility of a LINK token. Equivalent to 10^18 |
 
 ### Structs
 
@@ -170,7 +170,7 @@ function requestPriceFrom(address _oracle)
   public
 {
   Chainlink.Request memory request = buildChainlinkRequest(jobId, address(this), this.callback.callbackSelector);
-  uint256 paymentAmount = 1 * LINK_DIVISIBILITY;
+  uint256 paymentAmount = 1 * LINK_DIVISIBILITY; // = 1 LINK
 
   // send the request that you just built to a specified oracle
   sendChainlinkRequestTo(_oracle, request, paymentAmount);
@@ -363,12 +363,12 @@ Emitted when [cancelChainlinkRequest](#cancelchainlinkrequest) is called. Includ
 
 ## Constants
 
-### LINK-DIVISIBILITY
+### LINK_DIVISIBILITY
 
 `LINK_DIVISIBILITY` is a uint256 constant to represent one whole unit of the LINK token (1000000000000000000). It can be used with another value to specify payment in an easy-to-read format, instead of hardcoding magic numbers.
 
 ```solidity example
-uint256 constant private ORACLE_PAYMENT = 100 * LINK_DIVISIBILITY;
+uint256 constant private ORACLE_PAYMENT = 100 * LINK_DIVISIBILITY; // = 100 LINK
 ```
 
 ## Modifiers
@@ -453,7 +453,7 @@ function requestEthereumPrice()
 
   req.add("get", "https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD,EUR,JPY");
 
-  sendChainlinkRequest(req, LINK_DIVISIBILITY * 1);
+  sendChainlinkRequest(req, 1 * LINK_DIVISIBILITY); // =1 LINK
 }
 ```
 
